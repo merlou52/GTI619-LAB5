@@ -25,7 +25,6 @@ class ClientFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'type_id' => rand(1,2),
         ];
     }
 
