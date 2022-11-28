@@ -14,10 +14,11 @@
                             </div>
                         @endif
 
-                        This is the Admin Dashboard. You must be super privileged to be here !
+                        Page accessible au préposé aux clients résidentiels
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+

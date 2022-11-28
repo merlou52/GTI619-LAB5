@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\PrepAffairesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,5 +32,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/superadmin', [SuperAdminController::class, 'index']);
+Route::get('/prepAffaires', [PrepAffairesController::class, 'index']);
 

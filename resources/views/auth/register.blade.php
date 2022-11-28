@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Create a new user') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -61,10 +61,26 @@
                             </div>
                         </div>
 
+{{--                        <div class="row mb-3">--}}
+{{--                            <label for="user_level" class="col-md-4 col-form-label text-md-end">{{ __('User Level') }}</label>--}}
+
+{{--                            <div class="col-md-6">--}}
+{{--                                <select name="user-level" id="user-level" class="form-control">--}}
+{{--                                    @foreach($roles as $role)--}}
+{{--                                        <option value="{{ $role->id }}">{{ $role->name }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                    <option value="">Please choose an option...</option>--}}
+{{--                                    <option value="admin">ADMIN</option>--}}
+{{--                                    <option value="affaires">PREP. CLIENTS AFFAIRES</option>--}}
+{{--                                    <option value="residentiel">PREP. CLIENTS RESIDENTIELS</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Create new user') }}
                                 </button>
                             </div>
                         </div>
