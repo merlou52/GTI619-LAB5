@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -23,7 +23,9 @@ class ClientFactory extends Factory
     public function definition()
     {
         return [
-            //TODO à finir
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'type_id' => rand(1,2),
         ];
     }
 
@@ -36,6 +38,7 @@ class ClientFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
+
             ];
         });
     }

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
          * Creates 10 random clients
          */
 
-         // \App\Models\Client::factory(10)->create();
+         \App\Models\Client::factory(10)->create();
 
         /**
          * Creates the 3 users (admin, user1 and user2)
@@ -77,19 +77,35 @@ class DatabaseSeeder extends Seeder
          * Creates the links users-roles
          */
 
-        DB::table('roles_user')->insert([
+        DB::table('role_user')->insert([
             'role_id' => 1,
             'user_id' => 1,
         ]);
 
-        DB::table('roles_user')->insert([
+        DB::table('role_user')->insert([
             'role_id' => 2,
             'user_id' => 2,
         ]);
 
-        DB::table('roles_user')->insert([
+        DB::table('role_user')->insert([
             'role_id' => 3,
             'user_id' => 3,
+        ]);
+
+        /**
+         * Creates the client types
+         */
+
+        DB::table('client_types')->insert([
+            'id' => 1,
+            'name' => 'CLIENT_AFFAIRES',
+            'description' => 'client professionnel ayant un contact privilégié',
+        ]);
+
+        DB::table('client_types')->insert([
+            'id' => 2,
+            'name' => 'CLIENT_RESIDENTIEL',
+            'description' => 'client residentiel'
         ]);
     }
 }
