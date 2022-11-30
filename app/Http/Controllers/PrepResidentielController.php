@@ -10,8 +10,7 @@ class PrepResidentielController extends Controller
 
     {
         $this->middleware('auth');
-        $this->middleware('role:ROLE_PREPOSE_CLIENTS_RESIDENTIELS');
-        $this->middleware('role:ROLE_ADMIN');
+        $this->middleware(['role:ROLE_ADMIN, null, ROLE_PREPOSE_CLIENTS_RESIDENTIELS']);
     }
 
     public function index()

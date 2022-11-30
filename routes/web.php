@@ -33,4 +33,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/prepAffaires', [PrepAffairesController::class, 'index']);
+Route::get('/prepResidentiel', [\App\Http\Controllers\PrepResidentielController::class, 'index']);
 

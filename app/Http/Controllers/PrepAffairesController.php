@@ -10,8 +10,7 @@ class PrepAffairesController extends Controller
 
     {
         $this->middleware('auth');
-        $this->middleware('role:ROLE_PREPOSE_CLIENTS_AFFAIRE');
-        $this->middleware('role:ROLE_ADMIN');
+        $this->middleware(['role:ROLE_ADMIN, ROLE_PREPOSE_CLIENTS_AFFAIRE, null ']);
     }
 
     public function index()
