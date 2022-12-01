@@ -13,7 +13,14 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        This is Admin Dashboard.
+                            <div align="left">
+                                <br />
+                                <a href="{{route('client.index')}}" class="btn btn-primary">Accéder aux clients</a>
+                                <br />
+                                <br />
+                                <a href="{{route('register')}}" class="btn btn-danger">Ajouter un nouvel utilisateur</a>
+                                <br />
+                            </div>
                     </div>
                 </div>
             </div>

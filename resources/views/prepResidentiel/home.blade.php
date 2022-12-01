@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Bienvenue préposé aux clients résidentiels</div>
+                    <div class="panel-heading">Dashboard du préposé aux clients résidentiels</div>
 
                     <div class="panel-body">
                         @if (session('status'))
@@ -13,7 +13,13 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        Dashboard du préposé aux clients résidentiels
+
+                            <div align="left">
+                                <br />
+                                <a href="{{route('client.index')}}" class="btn btn-primary">Accéder aux clients</a>
+                                <br />
+                                <br />
+                            </div>
                     </div>
                 </div>
             </div>
