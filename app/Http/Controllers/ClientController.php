@@ -4,18 +4,57 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Client;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
+    public function __construct()
+
+    {
+        $this->middleware('auth');
+        $this->middleware(['role:ROLE_ADMIN, ROLE_PREPOSE_CLIENTS_AFFAIRES, ROLE_PREPOSE_CLIENTS_RESIDENTIELS']);
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-        $clients = Client::all()->toArray();
-        return view('client.index', compact('clients'));
+        //$clients = Client::all()->toArray();
+
+
+        if(auth()->user()->hasRole('ROLE_ADMIN'))
+        {
+            $clients = DB::table('clients')
+                -> join('client_type', 'clients.id', '=', 'client_type.client_id')
+                -> join('types', 'client_type.type_id', '=', 'types.id')
+                -> get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
+
+            return view('client.index', compact('clients'));
+
+        }else if(auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_AFFAIRES'))
+        {
+            $clients = DB::table('clients')
+                -> join('client_type', 'clients.id', '=', 'client_type.client_id')
+                -> join('types', 'client_type.type_id', '=', 'types.id')
+                -> where('types.name','=','CLIENT_AFFAIRES')
+                -> get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
+
+            return view('client.index', compact('clients'));
+
+        }else if(auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_RESIDENTIELS'))
+        {
+            $clients = DB::table('clients')
+                -> join('client_type', 'clients.id', '=', 'client_type.client_id')
+                -> join('types', 'client_type.type_id', '=', 'types.id')
+                -> where('types.name', '=', 'CLIENT_RESIDENTIEL')
+                -> get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
+
+            return view('client.index', compact('clients'));
+
+        }
     }
 
     /**

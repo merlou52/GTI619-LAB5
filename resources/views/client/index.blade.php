@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('content')
 
@@ -21,16 +21,18 @@
    <tr>
     <th>First Name</th>
     <th>Last Name</th>
+       <th>Client Type</th>
     <th>Edit</th>
     <th>Delete</th>
    </tr>
    @foreach($clients as $row)
    <tr>
-    <td>{{$row['first_name']}}</td>
-    <td>{{$row['last_name']}}</td>
-    <td><a href="{{route('client.edit',['id'=> $row['id']])}}" class="btn btn-warning">Edit</a></td>
+    <td>{{$row->first_name}}</td>
+    <td>{{$row->last_name}}</td>
+       <td>{{$row->name}}</td>
+    <td><a href="{{route('client.edit',['id'=> $row->id])}}" class="btn btn-warning">Edit</a></td>
     <td>
-     <form method="post" class="delete_form" action="{{route('client.destroy',['id'=> $row['id']])}}">
+     <form method="post" class="delete_form" action="{{route('client.destroy',['id'=> $row->id])}}">
       {{csrf_field()}}
       <input type="hidden" name="_method" value="DELETE" />
       <button type="submit" class="btn btn-danger">Delete</button>

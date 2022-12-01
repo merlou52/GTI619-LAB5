@@ -13,8 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        This is Admin Dashboard. You must be privileged to be here !
+                        This is Admin Dashboard.
                     </div>
                 </div>
             </div>
