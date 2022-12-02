@@ -15,9 +15,9 @@ use App\Http\Controllers\PrepAffairesController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::resource('client', ClientController::class);
 Route::get('client/{id}/edit', 'ClientController@edit')->name('client.edit');
@@ -28,10 +28,13 @@ Route::delete('client/{id}', 'ClientController@destroy')->name('client.destroy')
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/createUser', [\App\Http\Controllers\CreateNewUserController::class, 'index'])->name('admin.usercreate');
+Route::post('/createUser', [\App\Http\Controllers\CreateNewUserController::class, 'create']);
+
 Route::get('/prepAffaires', [PrepAffairesController::class, 'index']);
 Route::get('/prepResidentiel', [\App\Http\Controllers\PrepResidentielController::class, 'index']);
 

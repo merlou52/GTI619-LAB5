@@ -18,7 +18,7 @@
                                 <a href="{{route('client.index')}}" class="btn btn-primary">Accéder aux clients</a>
                                 <br />
                                 <br />
-                                <a href="{{route('register')}}" class="btn btn-danger">Ajouter un nouvel utilisateur</a>
+                                <a href="{{route('admin.usercreate')}}" class="btn btn-danger">Ajouter un nouvel utilisateur</a>
                                 <br />
                             </div>
                     </div>
