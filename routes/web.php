@@ -31,10 +31,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/createUser', [\App\Http\Controllers\CreateNewUserController::class, 'index'])->name('admin.usercreate');
 Route::post('/createUser', [\App\Http\Controllers\CreateNewUserController::class, 'create']);
 
-Route::get('/prepAffaires', [PrepAffairesController::class, 'index']);
-Route::get('/prepResidentiel', [\App\Http\Controllers\PrepResidentielController::class, 'index']);
 

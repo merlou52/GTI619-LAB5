@@ -62,8 +62,6 @@ class CreateNewUserController extends Controller
             'updated_at' => date("Y-m-d H:i:s")
         ]);
 
-        return $request->wantsJson()
-            ? new JsonResponse([], 201)
-            : redirect('/admin');
+        return redirect()->route('home')->with('success', 'Nouvel utilisateur ajouté avec succès !');
     }
 }

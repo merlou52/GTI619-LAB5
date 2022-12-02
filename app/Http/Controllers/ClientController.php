@@ -25,32 +25,29 @@ class ClientController extends Controller
         //$clients = Client::all()->toArray();
 
 
-        if(auth()->user()->hasRole('ROLE_ADMIN'))
-        {
+        if (auth()->user()->hasRole('ROLE_ADMIN')) {
             $clients = DB::table('clients')
-                -> join('client_type', 'clients.id', '=', 'client_type.client_id')
-                -> join('types', 'client_type.type_id', '=', 'types.id')
-                -> get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
+                ->join('client_type', 'clients.id', '=', 'client_type.client_id')
+                ->join('types', 'client_type.type_id', '=', 'types.id')
+                ->get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
 
             return view('client.index', compact('clients'));
 
-        }else if(auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_AFFAIRES'))
-        {
+        } else if (auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_AFFAIRES')) {
             $clients = DB::table('clients')
-                -> join('client_type', 'clients.id', '=', 'client_type.client_id')
-                -> join('types', 'client_type.type_id', '=', 'types.id')
-                -> where('types.name','=','CLIENT_AFFAIRES')
-                -> get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
+                ->join('client_type', 'clients.id', '=', 'client_type.client_id')
+                ->join('types', 'client_type.type_id', '=', 'types.id')
+                ->where('types.name', '=', 'CLIENT_AFFAIRES')
+                ->get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
 
             return view('client.index', compact('clients'));
 
-        }else if(auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_RESIDENTIELS'))
-        {
+        } else if (auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_RESIDENTIELS')) {
             $clients = DB::table('clients')
-                -> join('client_type', 'clients.id', '=', 'client_type.client_id')
-                -> join('types', 'client_type.type_id', '=', 'types.id')
-                -> where('types.name', '=', 'CLIENT_RESIDENTIEL')
-                -> get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
+                ->join('client_type', 'clients.id', '=', 'client_type.client_id')
+                ->join('types', 'client_type.type_id', '=', 'types.id')
+                ->where('types.name', '=', 'CLIENT_RESIDENTIEL')
+                ->get(['clients.id', 'clients.first_name', 'clients.last_name', 'types.name']);
 
             return view('client.index', compact('clients'));
 
@@ -70,26 +67,27 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { $this->validate($request, [
-        'first_name'    =>  'required',
-        'last_name'     =>  'required'
-    ]);
-    $client = new client([
-        'first_name'    =>  $request->get('first_name'),
-        'last_name'     =>  $request->get('last_name')
-    ]);
-    $client->save();
-    return redirect()->route('client.index')->with('success', 'Client ajouté');
+    {
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required'
+        ]);
+        $client = new client([
+            'first_name' => $request->get('first_name'),
+            'last_name' => $request->get('last_name')
+        ]);
+        $client->save();
+        return redirect()->route('client.index')->with('success', 'Client ajouté');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -100,7 +98,7 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -112,15 +110,15 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'first_name'    =>  'required',
-            'last_name'     =>  'required'
+            'first_name' => 'required',
+            'last_name' => 'required'
         ]);
         $client = client::find($id);
         $client->first_name = $request->get('first_name');
@@ -132,13 +130,37 @@ class ClientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        $client = client::find($id);
-        $client->delete();
-        return redirect()->route('client.index')->with('success', 'Client supprimé');
+        $client = Client::find($id);
+
+//        $client_type = DB::table('client_type')
+//            ->where('client_id', '=', $id)
+//            ->join('types', 'client_type.id', '=', 'types.id')
+//            ->select('types.names')
+//            ->get();
+
+        if (auth()->user()->hasRole('ROLE_ADMIN')) {
+
+            $client->delete();
+            return redirect()->route('client.index')->with('success', 'Client supprimé');
+
+        } else if (($client->client_type('CLIENT_AFFAIRES')) && (auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_AFFAIRES'))) {
+
+            $client->delete();
+            return redirect()->route('client.index')->with('success', 'Client supprimé');
+
+        } else if (($client->client_type('CLIENT_AFFAIRES')) && (auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_RESIDENTIELS'))) {
+
+            $client->delete();
+            return redirect()->route('client.index')->with('success', 'Client supprimé');
+        } else {
+            return redirect()->route('client.index')->with('error', "Vous n'avez pas les droits");
+        }
+
+
     }
 }

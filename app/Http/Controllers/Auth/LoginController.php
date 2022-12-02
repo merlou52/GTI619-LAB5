@@ -22,18 +22,8 @@ class LoginController extends Controller
 
     protected function authenticated()
     {
-        if(auth()->user()->hasRole('ROLE_ADMIN'))
-        {
-            return redirect('/admin');
-        }else if(auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_AFFAIRES'))
-        {
-            return redirect('/prepAffaires');
-        }else if(auth()->user()->hasRole('ROLE_PREPOSE_CLIENTS_RESIDENTIELS'))
-        {
-            return redirect('/prepResidentiel');
-        }
 
-        return redirect('/home');
+        return redirect('/');
     }
 
     /**

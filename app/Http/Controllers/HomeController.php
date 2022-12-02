@@ -14,6 +14,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(['role:ROLE_ADMIN, ROLE_PREPOSE_CLIENTS_AFFAIRES, ROLE_PREPOSE_CLIENTS_RESIDENTIELS']);
+
     }
 
     /**
