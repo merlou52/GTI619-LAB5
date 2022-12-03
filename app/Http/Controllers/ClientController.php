@@ -153,7 +153,7 @@ class ClientController extends Controller
 
             return view('client.edit', compact('client', 'id', 'type_id', 'types'));
         }else{
-            return view('client.index');
+            return $this->index();
         }
 
     }
