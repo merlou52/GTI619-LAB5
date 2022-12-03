@@ -50,14 +50,10 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            $('.delete_form').on('submit', function () {
-                if (confirm("Voulez-vous vraiment supprimer ce client?")) {
-                    return true;
-                } else {
-                    return false;
-                }
+        //$(document).ready(function () {
+            $(".delete_form").on("submit", function(){
+                return confirm("Are you sure?");
             });
-        });
+        //});
     </script>
 @endsection
