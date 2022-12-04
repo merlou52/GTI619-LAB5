@@ -6,6 +6,7 @@ Le projet fonctionne sous docker, de la même manière que le squelette donné d
 
 ```shell
 composer install
+cd <racine_projet>/vendor/bin
 ./sail up -d
 ./sail artisan migrate
 ./sail artisan db:seed
