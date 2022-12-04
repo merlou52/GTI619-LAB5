@@ -14,9 +14,11 @@ class CreateClientTypeTable extends Migration
     public function up()
     {
         Schema::create('client_type', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('type_id')->unsigned();
-            $table->integer('client_id')->unsigned();
+            $table->id();
+            $table->unsignedBigInteger('type_id')->unsigned();
+            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
+            $table->unsignedBigInteger('client_id')->unsigned();
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->timestamps();
         });
     }
