@@ -11,6 +11,21 @@ composer install
 ./sail artisan db:seed
 ```
 
+## Récupérer le certificat root CA pour le navigateur
+
+1) Récupérer l'id du conteneur Caddy
+````shell
+docker ps
+````
+
+2) Copier le certificat
+
+````shell
+docker cp {container_id}:/config/caddy/pki/authorities/local/root.crt {endroit_ou_vous_voulez_copier}
+````
+
+3) Installer le certificat dans le navigateur
+
 ## Auteurs
 
 Antoine Merle,
