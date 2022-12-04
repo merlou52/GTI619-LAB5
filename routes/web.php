@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PrepAffairesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +17,8 @@ use App\Http\Controllers\PrepAffairesController;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+
+Route::get('/caddy-check', 'App\Http\Controllers\CaddyController@check');
 
 Route::resource('client', ClientController::class);
 Route::get('client/{id}/edit', 'ClientController@edit')->name('client.edit');
