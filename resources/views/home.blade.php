@@ -20,6 +20,22 @@
                         @endif
 
                         <div align="left">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">Authentification double-facteur</div>
+
+                                        <div class="panel-body">
+                                            @if (Auth::user()->google2fa_secret)
+                                                <a href="{{ url('2fa/disable') }}" class="btn btn-warning">Désactiver 2FA</a>
+                                            @else
+                                                <a href="{{ url('2fa/enable') }}" class="btn btn-primary">Activer la 2FA</a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
                             <br/>
                             <a href="{{route('client.index')}}" class="btn btn-primary">Accéder aux clients</a>
                             <br/>
