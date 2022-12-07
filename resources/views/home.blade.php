@@ -45,6 +45,46 @@
                                 <a href="{{route('admin.usercreate')}}" class="btn btn-danger">Ajouter un nouvel
                                     utilisateur</a>
                                 <br/>
+
+                                <h3>Configuration de sécurité</h3>
+                            <form method="post" action="{{url('configuration')}}">
+
+                                <div>
+                                    <h4>Protection d'attaque</h4>
+                                <p>Nombre de connection maximale
+                                    <input type="number" name = "connectionLimit">
+                                </p>
+                                <p>délais
+                                    <input type="number" name = "delay">
+                                </p>
+                                <p>bloquage d'acces
+                                    <input type="checkbox" name = "accessBlocker">
+                                </p>
+                                </div>
+
+                                <div>
+                                    <h4>Norme de mot de passe</h4>
+                                    <p>Nombre de caractère minimal
+                                        <input type="number" name = "minChar">
+                                    </p>
+                                    <p>Nombre de mot de passe innutilisable
+                                        <input type="number" name = "numberOfSavedPassword">
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <h4>Gestion de mot de passe</h4>
+                                    <p>Changement périodique (en jours)
+                                        <input type="number" name = "numberOfDayBeforeChange">
+                                    </p>
+                                    <p>Forcé le changement de mot de passe si limite excédé
+                                        <input type="checkbox" name = "forceChangeIfCompromised">
+                                    </p>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                            </form>
+
                             @endif
                         </div>
                     </div>
