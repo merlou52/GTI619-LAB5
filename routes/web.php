@@ -25,6 +25,7 @@ Route::get('client/{id}/edit', 'ClientController@edit')->name('client.edit');
 Route::put('client/{id}', 'ClientController@update')->name('client.update');
 Route::delete('client/{id}', 'ClientController@destroy')->name('client.destroy');
 
+Route::post('configuration',"\App\Http\Controllers\HomeController@saveConfiguration");
 
 
 Auth::routes();

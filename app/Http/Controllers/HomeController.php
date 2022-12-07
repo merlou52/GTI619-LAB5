@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -26,5 +27,36 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function saveConfiguration(Request $request)
+    {
+        if (auth()->user()->hasRole('ROLE_ADMIN')) {
+            $config = DB::table('configuration')->first();
+            if ($config == null) {
+                DB::table('configuration')->insert([
+                    'connectionLimit' => $request->input("connectionLimit"),
+                    'delay' => $request->input("delay"),
+                    'accessBlocker' => $request->input("accessBlocker"),
+                    'minChar' => $request->input("minChar"),
+                    'numberOfSavedPassword' => $request->input("numberOfSavedPassword"),
+                    'numberOfDayBeforeChange' => $request->input("numberOfDayBeforeChange"),
+                    'forceChangeIfCompromised' => $request->input("forceChangeIfCompromised")
+                ]);
+            } else {
+                DB::table('configuration')->where(1, $config->id)->update([
+                    'connectionLimit' => $request->input("connectionLimit"),
+                    'delay' => $request->input("delay"),
+                    'accessBlocker' => $request->input("accessBlocker"),
+                    'minChar' => $request->input("minChar"),
+                    'numberOfSavedPassword' => $request->input("numberOfSavedPassword"),
+                    'numberOfDayBeforeChange' => $request->input("numberOfDayBeforeChange"),
+                    'forceChangeIfCompromised' => $request->input("forceChangeIfCompromised")
+                ]);
+            }
+
+            return route('home');
+        }
+        return route('login');
     }
 }
