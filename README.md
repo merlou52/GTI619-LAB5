@@ -9,8 +9,9 @@ npm install
 composer install
 cd <racine_projet>/vendor/bin
 ./sail up -d
-./sail artisan migrate
+./sail artisan migrate:fresh
 ./sail artisan db:seed
+./sail cache:clear
 ```
 
 ## Récupérer le certificat root CA pour le navigateur
