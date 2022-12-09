@@ -37,11 +37,11 @@ class HomeController extends Controller
                 DB::table('configuration')->insert([
                     'connectionLimit' => $request->input("connectionLimit"),
                     'delay' => $request->input("delay"),
-                    'accessBlocker' => $request->input("accessBlocker"),
+                    'accessBlocker' => $request->input("accessBlocker")??false,
                     'minChar' => $request->input("minChar"),
                     'numberOfSavedPassword' => $request->input("numberOfSavedPassword"),
                     'numberOfDayBeforeChange' => $request->input("numberOfDayBeforeChange"),
-                    'forceChangeIfCompromised' => $request->input("forceChangeIfCompromised")
+                    'forceChangeIfCompromised' => $request->input("forceChangeIfCompromised")??false
                 ]);
             } else {
                 DB::table('configuration')->where(1, $config->id)->update([
@@ -55,8 +55,8 @@ class HomeController extends Controller
                 ]);
             }
 
-            return route('home');
+            return view('home');
         }
-        return route('login');
+        return view('home');
     }
 }

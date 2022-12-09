@@ -47,8 +47,8 @@
                                 <br/>
 
                                 <h3>Configuration de sécurité</h3>
-                            <form method="post" action="{{url('configuration')}}">
-
+                            <form method="post" action="{{url('')}}">
+                                {{csrf_field()}}
                                 <div>
                                     <h4>Protection d'attaque</h4>
                                 <p>Nombre de connection maximale

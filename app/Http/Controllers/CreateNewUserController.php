@@ -66,6 +66,8 @@ class CreateNewUserController extends Controller
             'updated_at' => date("Y-m-d H:i:s")
         ]);
 
+        Log::info("L'utilisateur ".$request['name']." avec le courriel ".$request['email']." à été créé à ". date("Y-m-d H:i:s")." par ".auth()->user());
+
         return redirect()->route('home')->with('success', 'Nouvel utilisateur ajouté avec succès !');
     }
 }
