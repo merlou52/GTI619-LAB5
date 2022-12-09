@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Authenticatable;
 use App\Http\Requests\ValidateSecretRequest;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
+    protected $maxAttempts = 3;
+    protected $decayMinutes = 2;
+
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -34,6 +38,7 @@ class LoginController extends Controller
      */
     private function authenticated(Request $request, Authenticatable $user)
     {
+        Log::info("l'utilisateur ".$user." c'est connecter.");
         if ($user->google2fa_secret) {
             Auth::logout();
 

@@ -27,9 +27,11 @@ Route::delete('client/{id}', 'ClientController@destroy')->name('client.destroy')
 
 
 
+
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/',[\App\Http\Controllers\HomeController::class, 'saveConfiguration']);
 
 
 Route::get('/createUser', [\App\Http\Controllers\CreateNewUserController::class, 'index'])->name('admin.usercreate');

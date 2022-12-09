@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ClientController extends Controller
@@ -113,6 +114,7 @@ class ClientController extends Controller
 
             return redirect()->route('client.index')->with('success', 'Client ajouté');
         }else{
+            Log::info("L'utilisateur ".auth()->user()." a essayé d'ajouter un client non attribué");
             return redirect()->route('client.index')->with('error', "Vous n'avez pas les droits pour ajouter ce type de client !");
         }
 
@@ -153,6 +155,7 @@ class ClientController extends Controller
 
             return view('client.edit', compact('client', 'id', 'type_id', 'types'));
         }else{
+            Log::info("L'utilisateur ".auth()->user()." a essayé d'accéder à un client non attribué");
             return $this->index();
         }
 
@@ -192,6 +195,7 @@ class ClientController extends Controller
 
             return redirect()->route('client.index')->with('success', 'Client modifié');
         }else{
+            Log::info("L'utilisateur ".auth()->user()." a essayé d'ajouter un client non attribué");
             return redirect()->route('client.index')->with('error', "Vous n'avez pas les droits pour faire cela");
         }
     }
@@ -227,6 +231,7 @@ class ClientController extends Controller
             $client->delete();
             return redirect()->route('client.index')->with('success', 'Client supprimé');
         } else {
+            Log::info("L'utilisateur ".auth()->user()." a essayé de supprimer un client non attribué");
             return redirect()->route('client.index')->with('error', "Vous n'avez pas les droits");
         }
 

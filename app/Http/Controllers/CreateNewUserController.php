@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -34,10 +35,12 @@ class CreateNewUserController extends Controller
      */
     protected function validator(array $data)
     {
+
+        $minCharPass = DB::table("configuration")->first()->minChar?"min:".DB::table("configuration")->first()->minChar:"min:8";
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', $minCharPass, 'confirmed'],
             'user-level' => ['required', 'integer'],
         ]);
     }
@@ -45,6 +48,7 @@ class CreateNewUserController extends Controller
     public function create(Request $request)
     {
         $this->validator($request->all())->validate();
+        Log::info("L'utilisateur ".$request['name']." avec le courriel ".$request['email']." à été créer à ". date("Y-m-d H:i:s"));
 
         $uid = DB::table('users')-> insertGetId([
             'name' => $request['name'],
@@ -61,6 +65,8 @@ class CreateNewUserController extends Controller
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s")
         ]);
+
+        Log::info("L'utilisateur ".$request['name']." avec le courriel ".$request['email']." à été créé à ". date("Y-m-d H:i:s")." par ".auth()->user());
 
         return redirect()->route('home')->with('success', 'Nouvel utilisateur ajouté avec succès !');
     }
