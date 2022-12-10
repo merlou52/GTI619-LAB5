@@ -30,7 +30,7 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Send the post-authentication response.
+     * Checks if the current user has enabled 2FA and redirects it to the correct page
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Illuminate\Contracts\Auth\Authenticatable $user
@@ -38,7 +38,7 @@ class LoginController extends Controller
      */
     private function authenticated(Request $request, Authenticatable $user)
     {
-        Log::info("l'utilisateur ".$user." c'est connecter.");
+        Log::info("l'utilisateur ".$user." s'est connecté");
         if ($user->google2fa_secret) {
             Auth::logout();
 
@@ -51,6 +51,7 @@ class LoginController extends Controller
     }
 
     /**
+     * Displays the validationToken blade for 2FA
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
@@ -64,6 +65,7 @@ class LoginController extends Controller
     }
 
     /**
+     * Post-2FA method, marks the user as authenticated and redirects it to the homepage
      *
      * @param  App\Http\Requests\ValidateSecretRequest $request
      * @return \Illuminate\Http\RedirectResponse

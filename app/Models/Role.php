@@ -9,6 +9,11 @@ class Role extends Model
 {
     use HasFactory;
 
+    /**
+     * Links to user model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
 
     {

@@ -19,6 +19,11 @@ class CreateNewUserController extends Controller
         $this->middleware(['role:ROLE_ADMIN, null, null']);
     }
 
+    /**
+     * Displays the blade allowing the admin to create a new user and assign a role to him
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $roles = DB::table('roles')
@@ -28,7 +33,7 @@ class CreateNewUserController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Validates the input.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
@@ -45,6 +50,13 @@ class CreateNewUserController extends Controller
         ]);
     }
 
+    /**
+     * Creates a new user in the database with his role
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function create(Request $request)
     {
         $this->validator($request->all())->validate();

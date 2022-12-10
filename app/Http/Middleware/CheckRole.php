@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 class CheckRole
 {
     /**
-     * Handle an incoming request.
+     * Checks the role of the current user and verifies he can access to the specified page.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

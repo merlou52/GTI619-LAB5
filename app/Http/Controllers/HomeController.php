@@ -29,6 +29,12 @@ class HomeController extends Controller
         return view('home');
     }
 
+    /**
+     * Pushes the admin conf in the DB
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function saveConfiguration(Request $request)
     {
         if (auth()->user()->hasRole('ROLE_ADMIN')) {

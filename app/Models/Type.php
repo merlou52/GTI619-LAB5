@@ -9,6 +9,11 @@ class Type extends Model
 {
     use HasFactory;
 
+    /**
+     * Links to Client model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function clients()
 
     {

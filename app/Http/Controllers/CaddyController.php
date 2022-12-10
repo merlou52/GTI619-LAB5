@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class CaddyController extends Controller
 {
+    /**
+     *  Checks the current domain during SSL connection establishment
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response|void
+     */
     public function check(Request $request)
     {
         $authorizedDomains = [

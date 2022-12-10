@@ -19,7 +19,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Displays registered clients according to the user role.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
@@ -58,7 +58,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Shows the "Add new client" blade.
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
@@ -71,7 +71,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Stores a newly created client if the user has the right to do this.
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
@@ -132,7 +132,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Shows the form in order to edit a specific client if the user has the right to do this
      *
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
@@ -162,7 +162,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Updates the client's info in the database.
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
@@ -201,7 +201,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deletes the selected client if the user has the right to do this.
      *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse

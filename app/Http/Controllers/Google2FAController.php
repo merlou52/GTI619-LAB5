@@ -25,6 +25,7 @@ class Google2FAController extends Controller
     }
 
     /**
+     * Enables 2FA for the selected user
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
@@ -54,6 +55,7 @@ class Google2FAController extends Controller
     }
 
     /**
+     * Disables the 2FA for the selected user
      *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response

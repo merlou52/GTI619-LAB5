@@ -42,6 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Links to Role model
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+
     public function roles()
 
     {
@@ -50,6 +56,12 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+    /**
+     * Authorizes or not a user according to his role
+     *
+     * @param $roles
+     * @return bool|void
+     */
     public function authorizeRoles($roles)
 
     {
@@ -58,6 +70,13 @@ class User extends Authenticatable
         }
         abort(401, 'This action is unauthorized.');
     }
+
+    /**
+     * Checks if the role of the current user is a known role
+     *
+     * @param $roles
+     * @return bool
+     */
     public function hasAnyRole($roles)
     {
         if (is_array($roles)) {
@@ -73,6 +92,13 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    /**
+     * Checks if the role of the current user is the specified one
+     *
+     * @param $roles
+     * @return bool
+     */
     public function hasRole($role)
     {
         if ($this->roles()->where('name', $role)->first()) {
